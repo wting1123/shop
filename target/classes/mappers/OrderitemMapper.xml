@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wuxi.shop.dao.OrderitemMapper">
+  <resultMap id="BaseResultMap" type="com.wuxi.shop.pojo.Orderitem">
+    <constructor>
+      <idArg column="itemid" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="count" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="subtotal" javaType="java.lang.Double" jdbcType="DOUBLE" />
+      <arg column="pid" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="oid" javaType="java.lang.String" jdbcType="VARCHAR" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List">
+    itemid, count, subtotal, pid, oid
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from orderitem
+    where itemid = #{itemid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from orderitem
+    where itemid = #{itemid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.wuxi.shop.pojo.Orderitem">
+    insert into orderitem (itemid, count, subtotal, 
+      pid, oid)
+    values (#{itemid,jdbcType=VARCHAR}, #{count,jdbcType=INTEGER}, #{subtotal,jdbcType=DOUBLE}, 
+      #{pid,jdbcType=VARCHAR}, #{oid,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wuxi.shop.pojo.Orderitem">
+    insert into orderitem
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="itemid != null">
+        itemid,
+      </if>
+      <if test="count != null">
+        count,
+      </if>
+      <if test="subtotal != null">
+        subtotal,
+      </if>
+      <if test="pid != null">
+        pid,
+      </if>
+      <if test="oid != null">
+        oid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="itemid != null">
+        #{itemid,jdbcType=VARCHAR},
+      </if>
+      <if test="count != null">
+        #{count,jdbcType=INTEGER},
+      </if>
+      <if test="subtotal != null">
+        #{subtotal,jdbcType=DOUBLE},
+      </if>
+      <if test="pid != null">
+        #{pid,jdbcType=VARCHAR},
+      </if>
+      <if test="oid != null">
+        #{oid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wuxi.shop.pojo.Orderitem">
+    update orderitem
+    <set>
+      <if test="count != null">
+        count = #{count,jdbcType=INTEGER},
+      </if>
+      <if test="subtotal != null">
+        subtotal = #{subtotal,jdbcType=DOUBLE},
+      </if>
+      <if test="pid != null">
+        pid = #{pid,jdbcType=VARCHAR},
+      </if>
+      <if test="oid != null">
+        oid = #{oid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where itemid = #{itemid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wuxi.shop.pojo.Orderitem">
+    update orderitem
+    set count = #{count,jdbcType=INTEGER},
+      subtotal = #{subtotal,jdbcType=DOUBLE},
+      pid = #{pid,jdbcType=VARCHAR},
+      oid = #{oid,jdbcType=VARCHAR}
+    where itemid = #{itemid,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wuxi.shop.dao.OrdersMapper">
+  <resultMap id="BaseResultMap" type="com.wuxi.shop.pojo.Orders">
+    <constructor>
+      <idArg column="oid" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="ordertime" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="total" javaType="java.lang.Double" jdbcType="DOUBLE" />
+      <arg column="state" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="address" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="name" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="telephone" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="uid" javaType="java.lang.String" jdbcType="VARCHAR" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List">
+    oid, ordertime, total, state, address, name, telephone, uid
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from orders
+    where oid = #{oid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from orders
+    where oid = #{oid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.wuxi.shop.pojo.Orders">
+    insert into orders (oid, ordertime, total, 
+      state, address, name, 
+      telephone, uid)
+    values (#{oid,jdbcType=VARCHAR}, #{ordertime,jdbcType=TIMESTAMP}, #{total,jdbcType=DOUBLE}, 
+      #{state,jdbcType=INTEGER}, #{address,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{telephone,jdbcType=VARCHAR}, #{uid,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wuxi.shop.pojo.Orders">
+    insert into orders
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="oid != null">
+        oid,
+      </if>
+      <if test="ordertime != null">
+        ordertime,
+      </if>
+      <if test="total != null">
+        total,
+      </if>
+      <if test="state != null">
+        state,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="telephone != null">
+        telephone,
+      </if>
+      <if test="uid != null">
+        uid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="oid != null">
+        #{oid,jdbcType=VARCHAR},
+      </if>
+      <if test="ordertime != null">
+        #{ordertime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="total != null">
+        #{total,jdbcType=DOUBLE},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=INTEGER},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="telephone != null">
+        #{telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="uid != null">
+        #{uid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wuxi.shop.pojo.Orders">
+    update orders
+    <set>
+      <if test="ordertime != null">
+        ordertime = #{ordertime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="total != null">
+        total = #{total,jdbcType=DOUBLE},
+      </if>
+      <if test="state != null">
+        state = #{state,jdbcType=INTEGER},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="telephone != null">
+        telephone = #{telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="uid != null">
+        uid = #{uid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where oid = #{oid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wuxi.shop.pojo.Orders">
+    update orders
+    set ordertime = #{ordertime,jdbcType=TIMESTAMP},
+      total = #{total,jdbcType=DOUBLE},
+      state = #{state,jdbcType=INTEGER},
+      address = #{address,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      telephone = #{telephone,jdbcType=VARCHAR},
+      uid = #{uid,jdbcType=VARCHAR}
+    where oid = #{oid,jdbcType=VARCHAR}
+  </update>
+</mapper>
